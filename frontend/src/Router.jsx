@@ -10,6 +10,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import ProfilPage from "./pages/ProfilPage";
 
 import FootballPage from "./pages/FootballPage";
+import LeagueDetailPage from "./pages/LeagueDetailPage";
 import BasketballPage from "./pages/BasketballPage";
 import LolPage from "./pages/LolPage";
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         element: <FootballPage />,
       },
       {
+        path: "/football/league/:leagueId",
+        element: <LeagueDetailPage />,
+      },
+      {
         path: "/basketball",
         element: <BasketballPage />,
       },
@@ -43,7 +48,7 @@ const router = createBrowserRouter([
         path: "/favorites",
         element: (
           <Route isProtected>
-            <FavoritesPage />
+            <FavoritesPage />/
           </Route>
         ),
       },
