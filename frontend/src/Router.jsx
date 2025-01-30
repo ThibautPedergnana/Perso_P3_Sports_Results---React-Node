@@ -10,7 +10,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import ProfilPage from "./pages/ProfilPage";
 
 import FootballPage from "./pages/FootballPage";
-import LeagueDetailPage from "./pages/LeagueDetailPage";
+import FootballLeaguePage from "./pages/FootballLeaguePage";
 import BasketballPage from "./pages/BasketballPage";
 import LolPage from "./pages/LolPage";
 
@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/football/league/:leagueId",
-        element: <LeagueDetailPage />,
+        element: <FootballLeaguePage />,
       },
       {
         path: "/basketball",

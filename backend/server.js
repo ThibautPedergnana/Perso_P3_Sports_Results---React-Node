@@ -27,9 +27,12 @@ app.use(
       console.log("Proxy request path:", proxyReq.path); // Log pour vérifier
       proxyReq.setHeader(
         "x-rapidapi-key",
-        process.env.API_KEY || " aa8b28f1bb21890f9cec6ebdc6f8c4ec"
+        process.env.FOOTBALL_API_KEY || " aa8b28f1bb21890f9cec6ebdc6f8c4ec"
       );
-      proxyReq.setHeader("x-rapidapi-host", "v3.football.api-sports.io");
+      proxyReq.setHeader(
+        "x-rapidapi-host",
+        process.env.FOOTBALL_API_HOST || "v3.football.api-sports.io"
+      );
     },
     onProxyRes: (proxyRes, req, res) => {
       console.log("Proxy response status:", proxyRes.statusCode); // Log pour vérifier
