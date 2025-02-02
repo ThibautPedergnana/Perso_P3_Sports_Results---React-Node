@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const STORAGE_KEY_LEAGUES = "cachedLeagues";
+const STORAGE_KEY_LEAGUES = "cached_leagues";
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 jour
 
 // Liste des ID des ligues qui t'intéressent
@@ -21,7 +21,6 @@ export async function getFootballLeagues() {
     }
 
     // Si le cache est expiré ou inexistant, récupérer les ligues depuis l'API
-    console.log("🌐 Récupération des ligues depuis l'API...");
     const response = await axios.get("/football-api/leagues", {
       headers: {
         "x-rapidapi-key": import.meta.env.VITE_FOOTBALL_API_KEY,
@@ -51,7 +50,7 @@ export async function getFootballLeagues() {
   }
 }
 
-const STORAGE_KEY_MATCHES = "matches_cache";
+const STORAGE_KEY_MATCHES = "cached_matches";
 
 export async function getMatchesByLeague(leagueId) {
   try {
@@ -85,6 +84,7 @@ export async function getMatchesByLeague(leagueId) {
     );
 
     const matches = response.data.response;
+    console.log("Réponse complète de l'API :", response.data);
 
     // Mettre en cache les résultats
     localStorage.setItem(
