@@ -10,7 +10,7 @@ const authFormSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters" }),
+    .min(2, { message: "Password must be at least 2 characters" }),
 });
 
 const AuthForm = () => {
@@ -30,18 +30,13 @@ const AuthForm = () => {
   const onSubmit = async (data) => {
     try {
       if (isLogin) {
-        // Mode connexion
         const token = await loginUser({
           email: data.email,
           password: data.password,
         });
         setToken(token);
       } else {
-        // Mode inscription
-        const token = await registerUser({
-          email: data.email,
-          password: data.password,
-        });
+        const token = await registerUser(data);
         setToken(token);
       }
 

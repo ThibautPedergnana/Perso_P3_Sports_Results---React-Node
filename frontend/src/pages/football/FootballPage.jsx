@@ -17,10 +17,8 @@ export default function FootballPage() {
       try {
         setLoading(true);
 
-        // Récupérer les ligues
         const leagues = await getFootballLeagues();
         if (leagues) {
-          // Filtrer les ligues
           const allowedIds = [140, 78, 61, 135, 39, 2, 3];
           const filteredLeagues = leagues.filter(
             (league) =>
@@ -28,7 +26,6 @@ export default function FootballPage() {
               league.seasons.some((season) => season.current === true)
           );
 
-          // Séparer les ligues nationales et mondiales
           setNationalLeagues(
             filteredLeagues.filter((league) => league.country.name !== "World")
           );
@@ -36,7 +33,6 @@ export default function FootballPage() {
             filteredLeagues.filter((league) => league.country.name === "World")
           );
 
-          // Récupérer les matchs pour chaque ligue
           const allMatches = {};
           for (let league of filteredLeagues) {
             const leagueId = league.league.id;

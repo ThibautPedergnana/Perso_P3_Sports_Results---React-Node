@@ -14,18 +14,15 @@ export const useTheme = () => {
 
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Charger l'état du thème depuis localStorage ou utiliser le thème par défaut
     const savedTheme = localStorage.getItem("theme");
     return savedTheme ? savedTheme === "dark" : false;
   });
 
   useEffect(() => {
-    // Appliquer la classe CSS correspondante au body
     document.body.classList.toggle("dark", isDarkMode);
     localStorage.setItem("theme", isDarkMode ? "dark" : "light");
   }, [isDarkMode]);
 
-  // Basculer entre les thèmes
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode);
   };

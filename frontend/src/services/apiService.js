@@ -16,7 +16,6 @@ export async function getFootballLeagues() {
       parsedData.leagues &&
       Date.now() - parsedData.timestamp < EXPIRATION_TIME
     ) {
-      console.log("🔄 Chargement des ligues depuis le cache");
       return parsedData.leagues;
     }
 
@@ -24,7 +23,6 @@ export async function getFootballLeagues() {
     const response = await axios.get("/football-api/leagues", {
       headers: {
         "x-rapidapi-key": import.meta.env.VITE_FOOTBALL_API_KEY,
-        "x-rapidapi-host": import.meta.env.VITE_FOOTBALL_API_HOST,
       },
     });
 
@@ -62,29 +60,21 @@ export async function getMatchesByLeague(leagueId) {
       parsedData[leagueId] &&
       Date.now() - parsedData[leagueId].timestamp < EXPIRATION_TIME
     ) {
-      console.log(
-        `🔄 Chargement des matchs depuis le cache pour la ligue ${leagueId}`
-      );
       return parsedData[leagueId].matches;
     }
 
     // Si pas en cache ou expiré, récupérer les données depuis l'API
-    console.log(
-      `📡 Requête API pour récupérer les matchs de la ligue ${leagueId}`
-    );
     const season = 2022;
     const response = await axios.get(
       `/football-api/fixtures?league=${leagueId}&season=${season}`,
       {
         headers: {
           "x-rapidapi-key": import.meta.env.VITE_FOOTBALL_API_KEY,
-          "x-rapidapi-host": import.meta.env.VITE_FOOTBALL_API_HOST,
         },
       }
     );
 
     const matches = response.data.response;
-    console.log("Réponse complète de l'API :", response.data);
 
     // Mettre en cache les résultats
     localStorage.setItem(
@@ -98,6 +88,56 @@ export async function getMatchesByLeague(leagueId) {
     return matches;
   } catch (error) {
     console.error("Erreur lors de la récupération des matchs :", error);
+    throw error;
+  }
+}
+
+const STORAGE_KEY_TEAMS = "cached_teams";
+
+export async function getTeamsById(teamId) {
+  try {
+    const cachedData = localStorage.getItem(STORAGE_KEY_TEAMS);
+    const parsedData = cachedData ? JSON.parse(cachedData) : {}; // Ajout d'une valeur par défaut
+
+    if (
+      parsedData[teamId] &&
+      Date.now() - parsedData[teamId].timestamp < EXPIRATION_TIME
+    ) {
+      return parsedData[teamId].team;
+    }
+
+    // Si le cache est expiré ou inexistant, récupérer les données depuis l'API
+    const response = await axios.get(
+      `https://v3.football.api-sports.io/teams?id=${teamId}`,
+      {
+        headers: {
+          "x-apisports-key": import.meta.env.VITE_FOOTBALL_API_KEY,
+        },
+      }
+    );
+
+    if (
+      !response.data ||
+      !response.data.response ||
+      response.data.response.length === 0
+    ) {
+      throw new Error("Aucune équipe trouvée pour cet ID");
+    }
+    // Extraire uniquement l'équipe
+    const team = response.data.response[0];
+
+    // Stocker en cache
+    localStorage.setItem(
+      STORAGE_KEY_TEAMS,
+      JSON.stringify({
+        ...parsedData,
+        [teamId]: { team, timestamp: Date.now() },
+      })
+    );
+
+    return team;
+  } catch (error) {
+    console.error("❌ Erreur lors de la récupération de l'équipe :", error);
     throw error;
   }
 }

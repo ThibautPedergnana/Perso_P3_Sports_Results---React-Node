@@ -6,7 +6,6 @@ export default function FootballLeaguesPage() {
   return (
     <div className="flex justify-center p-4">
       <div className="w-full max-w-6xl flex">
-        {/* Ligues Nationales */}
         <div className="flex-1 flex flex-wrap justify-center gap-4">
           <h2 className="w-full text-center mb-4 text-xl font-semibold">
             Ligues Nationales
@@ -27,10 +26,8 @@ export default function FootballLeaguesPage() {
           ))}
         </div>
 
-        {/* Séparateur */}
         <div className="border-l-2 border-gray-300 mx-8" />
 
-        {/* Ligues Mondiales */}
         <div className="flex-1 flex flex-wrap justify-center gap-4">
           <h2 className="w-full text-center mb-4 text-xl font-semibold">
             Ligues Mondiales

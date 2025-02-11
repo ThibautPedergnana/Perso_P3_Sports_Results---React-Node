@@ -20,7 +20,6 @@ export default function FootballResultsPage() {
       try {
         setLoading(true);
         const data = await getMatchesByLeague(leagueId);
-        console.log("Données de matchs récupérées:", data); // Log des données de matchs
         setMatches(data);
       } catch (err) {
         setError("Impossible de charger les matchs.", err);
@@ -32,20 +31,21 @@ export default function FootballResultsPage() {
   }, [leagueId]);
 
   const now = new Date();
-  const pastMatches = matches.filter(
-    (match) => new Date(match.fixture.date) < now
-  );
-  const upcomingMatches = matches.filter(
-    (match) => new Date(match.fixture.date) >= now
-  );
 
-  // Trouver le nom de la ligue en fonction de l'ID
+  // Tri des matchs passés du plus récent au plus ancien
+  const pastMatches = matches
+    .filter((match) => new Date(match.fixture.date) < now)
+    .sort((a, b) => new Date(b.fixture.date) - new Date(a.fixture.date));
+
+  // Tri des matchs à venir du plus ancien au plus récent
+  const upcomingMatches = matches
+    .filter((match) => new Date(match.fixture.date) >= now)
+    .sort((a, b) => new Date(a.fixture.date) - new Date(b.fixture.date));
+
   const league = [...nationalLeagues, ...worldLeagues].find(
     (l) => l.league.id.toString() === leagueId
   );
   const leagueName = league ? league.league.name : "Ligue inconnue";
-
-  console.log("Matches dans FootballResultsPage:", matches); // Log des matchs avant de passer à l'Outlet
 
   return (
     <div className="w-full max-w-6xl mx-auto p-4">
@@ -57,7 +57,6 @@ export default function FootballResultsPage() {
 
         {!loading && !error && (
           <div className="flex gap-8">
-            {/* Matchs passés */}
             <div className="w-1/2 flex flex-col gap-4">
               <h2 className="text-xl font-semibold mb-2 text-center">
                 Matchs passés
@@ -80,10 +79,8 @@ export default function FootballResultsPage() {
               )}
             </div>
 
-            {/* Séparateur */}
             <div className="w-[2px] bg-gray-300"></div>
 
-            {/* Matchs à venir */}
             <div className="w-1/2 flex flex-col gap-4">
               <h2 className="text-xl font-semibold mb-2 text-center">
                 Matchs à venir
@@ -109,7 +106,6 @@ export default function FootballResultsPage() {
         )}
       </div>
 
-      {/* Passer les données via Outlet */}
       <Outlet context={{ matches }} />
     </div>
   );

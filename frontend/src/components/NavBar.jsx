@@ -12,12 +12,10 @@ const Navbar = () => {
     navigate(path);
   };
 
-  // Vérifie si on est sur la homepage
   const isHomePage = location.pathname === "/";
 
   return (
     <nav className="flex items-center justify-between bg-white shadow-md p-4">
-      {/* Logo Section */}
       <button
         className="text-xl font-bold text-gray-700"
         onClick={() => handleNavigation("/")}
@@ -25,11 +23,9 @@ const Navbar = () => {
         MyApp
       </button>
 
-      {/* Center Buttons : affichés uniquement si on N'EST PAS sur la homepage */}
       {!isHomePage && (
         <div className="flex space-x-6">
           <MainBtn onClick={() => handleNavigation("/football")}>
-            {/* Icone Football */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,7 +42,6 @@ const Navbar = () => {
             </svg>
           </MainBtn>
           <MainBtn onClick={() => handleNavigation("/basketball")}>
-            {/* Icone Basketball */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -63,7 +58,6 @@ const Navbar = () => {
             </svg>
           </MainBtn>
           <MainBtn onClick={() => handleNavigation("/lol")}>
-            {/* Icone LoL */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -82,7 +76,6 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* Right Section */}
       <div className="flex space-x-4">
         {token ? (
           <DropdownButton />
