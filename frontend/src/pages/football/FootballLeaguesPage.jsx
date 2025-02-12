@@ -30,7 +30,7 @@ export default function FootballLeaguesPage() {
 
         <div className="flex-1 flex flex-wrap justify-center gap-4">
           <h2 className="w-full text-center mb-4 text-xl font-semibold">
-            Ligues Mondiales
+            Ligues Européennes
           </h2>
           {worldLeagues.map((league) => (
             <Link

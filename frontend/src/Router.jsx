@@ -13,7 +13,7 @@ import FootballLeaguesPage from "./pages/football/FootballLeaguesPage";
 import FootballResultsPage from "./pages/football/FootballResultsPage";
 import FootballDetailsPage from "./pages/football/FootballDetailsPage";
 
-import BasketballPage from "./pages/BasketballPage";
+import BasketballPage from "./pages/basketball/BasketballPage";
 import LolPage from "./pages/LolPage";
 
 const router = createBrowserRouter([

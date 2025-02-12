@@ -25,12 +25,3 @@ export const loginUser = async (credentials) => {
   localStorage.setItem("authToken", response.data.token);
   return token;
 };
-
-// export const logoutUser = () => {
-//   localStorage.removeItem("authToken");
-// };
-
-// export const isAuthenticated = () => {
-//   const token = localStorage.getItem("authToken");
-//   return token !== null; // Vérifie la présence du token
-// };

@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const STORAGE_KEY_LEAGUES = "cached_leagues";
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 jour
 
+const STORAGE_KEY_LEAGUES = "cached_leagues";
 // Liste des ID des ligues qui t'intéressent
 const ALLOWED_LEAGUE_IDS = [140, 78, 61, 135, 39, 2, 3];
 
@@ -115,7 +115,6 @@ export async function getTeamsById(teamId) {
         },
       }
     );
-
     if (
       !response.data ||
       !response.data.response ||
