@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMatchesByLeague } from "../../services/apiService";
+import { getMatchesByLeague } from "../../services/apiFootballService";
 import { Link, useOutletContext } from "react-router-dom";
 import MatchCard from "../../components/MatchCard";
 import { Outlet } from "react-router-dom";

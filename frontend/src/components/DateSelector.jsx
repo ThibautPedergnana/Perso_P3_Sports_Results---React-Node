@@ -1,24 +1,21 @@
 import PropTypes from "prop-types";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { format } from "date-fns";
 
-export default function DateSelector({ selectedDate, onChange }) {
+export default function DateSelector({ selectedDate, onChange, displayMonth }) {
   const [showPicker, setShowPicker] = useState(false);
+  const [currentMonth, setCurrentMonth] = useState(displayMonth);
 
-  const handlePrevDay = () => {
-    onChange(new Date(selectedDate.setDate(selectedDate.getDate() - 1)));
-  };
-
-  const handleNextDay = () => {
-    onChange(new Date(selectedDate.setDate(selectedDate.getDate() + 1)));
-  };
+  // 🔥 Met à jour `currentMonth` à chaque changement de `displayMonth`
+  useEffect(() => {
+    setCurrentMonth(displayMonth);
+  }, [displayMonth]);
 
   return (
-    <div className="w-full bg-gray-900 text-white flex justify-between items-center p-4 relative shadow-md">
+    <div className="w-full text-white flex justify-between items-center p-4 relative">
       {/* Date Picker Bouton */}
       <div className="relative">
         <button
@@ -26,15 +23,17 @@ export default function DateSelector({ selectedDate, onChange }) {
           onClick={() => setShowPicker(!showPicker)}
         >
           <span className="text-lg font-semibold">
-            {format(selectedDate, "MMMM yyyy")}
+            {format(currentMonth, "MMMM yyyy")}
           </span>
           <ChevronDown size={20} />
         </button>
         {showPicker && (
-          <div className="absolute top-12 left-0 bg-white shadow-lg rounded-lg p-2 z-50">
+          <div className="absolute top-12 left-0 bg-white dark:bg-gray-300 dark:text-black shadow-lg rounded-lg p-2 z-50">
             <DayPicker
               mode="single"
               selected={selectedDate}
+              month={currentMonth} // 👈 Toujours synchronisé avec `displayMonth`
+              onMonthChange={setCurrentMonth} // Permet de changer manuellement
               onSelect={(date) => {
                 if (date) {
                   onChange(date);
@@ -45,19 +44,6 @@ export default function DateSelector({ selectedDate, onChange }) {
           </div>
         )}
       </div>
-
-      {/* Navigation par jour */}
-      <div className="flex items-center space-x-4">
-        <button onClick={handlePrevDay} className="p-2 bg-gray-800 rounded-lg">
-          <ChevronLeft size={24} />
-        </button>
-        <span className="text-lg font-semibold">
-          {format(selectedDate, "dd MMM yyyy")}
-        </span>
-        <button onClick={handleNextDay} className="p-2 bg-gray-800 rounded-lg">
-          <ChevronRight size={24} />
-        </button>
-      </div>
     </div>
   );
 }
@@ -65,4 +51,5 @@ export default function DateSelector({ selectedDate, onChange }) {
 DateSelector.propTypes = {
   selectedDate: PropTypes.instanceOf(Date).isRequired,
   onChange: PropTypes.func.isRequired,
+  displayMonth: PropTypes.instanceOf(Date).isRequired,
 };

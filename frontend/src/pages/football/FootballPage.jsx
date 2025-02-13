@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {
   getFootballLeagues,
   getMatchesByLeague,
-} from "../../services/apiService";
+} from "../../services/apiFootballService";
 import { Outlet } from "react-router-dom";
 
 export default function FootballPage() {

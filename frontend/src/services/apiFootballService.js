@@ -2,7 +2,7 @@ import axios from "axios";
 
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 jour
 
-const STORAGE_KEY_LEAGUES = "cached_leagues";
+const STORAGE_KEY_LEAGUES = "cached_football_leagues";
 // Liste des ID des ligues qui t'intéressent
 const ALLOWED_LEAGUE_IDS = [140, 78, 61, 135, 39, 2, 3];
 
@@ -22,7 +22,7 @@ export async function getFootballLeagues() {
     // Si le cache est expiré ou inexistant, récupérer les ligues depuis l'API
     const response = await axios.get("/football-api/leagues", {
       headers: {
-        "x-rapidapi-key": import.meta.env.VITE_FOOTBALL_API_KEY,
+        "x-rapidapi-key": import.meta.env.VITE_API_KEY,
       },
     });
 
@@ -48,7 +48,7 @@ export async function getFootballLeagues() {
   }
 }
 
-const STORAGE_KEY_MATCHES = "cached_matches";
+const STORAGE_KEY_MATCHES = "cached_football_matches";
 
 export async function getMatchesByLeague(leagueId) {
   try {
@@ -69,7 +69,7 @@ export async function getMatchesByLeague(leagueId) {
       `/football-api/fixtures?league=${leagueId}&season=${season}`,
       {
         headers: {
-          "x-rapidapi-key": import.meta.env.VITE_FOOTBALL_API_KEY,
+          "x-rapidapi-key": import.meta.env.VITE_API_KEY,
         },
       }
     );
@@ -111,7 +111,7 @@ export async function getTeamsById(teamId) {
       `https://v3.football.api-sports.io/teams?id=${teamId}`,
       {
         headers: {
-          "x-apisports-key": import.meta.env.VITE_FOOTBALL_API_KEY,
+          "x-apisports-key": import.meta.env.VITE_API_KEY,
         },
       }
     );
