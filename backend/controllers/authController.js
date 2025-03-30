@@ -8,22 +8,16 @@ const registerUser = async (req, res) => {
     const user = new User({ email, password });
     await user.save();
 
-    // Génération du token
-    const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "24h" } // Durée d'expiration
-    );
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "24h",
+    });
 
-    // Réponse avec le token
     res.status(201).json({
-      message: "Utilisateur créé avec succès !",
-      token, // Assurez-vous que le token est inclus dans la réponse
+      message: "User successfully created!",
+      token,
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Erreur lors de la création de l'utilisateur." });
+    res.status(500).json({ error: "Error during user creation." });
   }
 };
 
@@ -33,19 +27,17 @@ const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user)
-      return res.status(404).json({ error: "Utilisateur non trouvé." });
+    if (!user) return res.status(404).json({ error: "User not found." });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return res.status(401).json({ error: "Mot de passe incorrect." });
+    if (!isMatch) return res.status(401).json({ error: "Incorrect password." });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "24h",
     });
     res.json({ token, userId: user._id });
   } catch (error) {
-    res.status(500).json({ error: "Erreur lors de la connexion." });
+    res.status(500).json({ error: "Error during login." });
   }
 };
 

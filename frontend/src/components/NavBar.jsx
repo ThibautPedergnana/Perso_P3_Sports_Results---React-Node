@@ -15,64 +15,24 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
 
   return (
-    <nav className="flex items-center justify-between bg-white shadow-md p-4">
+    <nav className="relative flex items-center justify-between bg-white dark:bg-gray-800 shadow-md p-4">
       <button
-        className="text-xl font-bold text-gray-700"
+        className="text-xl font-bold text-gray-700 dark:text-white"
         onClick={() => handleNavigation("/")}
       >
-        MyApp
+        Sports-Results
       </button>
 
       {!isHomePage && (
-        <div className="flex space-x-6">
-          <MainBtn onClick={() => handleNavigation("/football")}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
-              />
-            </svg>
-          </MainBtn>
-          <MainBtn onClick={() => handleNavigation("/basketball")}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 2v20M2 12h20"
-              />
-            </svg>
-          </MainBtn>
-          <MainBtn onClick={() => handleNavigation("/lol")}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3 3h18v18H3zM6 6h12v12H6z"
-              />
-            </svg>
-          </MainBtn>
+        <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-6">
+          <MainBtn
+            labelItem="football"
+            onClick={() => handleNavigation("/football")}
+          />
+          <MainBtn
+            labelItem="basketball"
+            onClick={() => handleNavigation("/basketball")}
+          />
         </div>
       )}
 

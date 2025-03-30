@@ -1,9 +1,12 @@
 import axios from "axios";
 
 const STORAGE_KEY_NBA_GAMES = "cached_nba_games";
-const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 jour
+const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 1 day
 
-export async function getNBAGames({ season = 2023, league = "standard" } = {}) {
+export async function getNBAGames(
+  { season = 2023, league = "standard" } = {},
+  signal
+) {
   try {
     const cachedData = localStorage.getItem(STORAGE_KEY_NBA_GAMES);
     const parsedData = cachedData ? JSON.parse(cachedData) : {};
@@ -26,8 +29,9 @@ export async function getNBAGames({ season = 2023, league = "standard" } = {}) {
         "x-rapidapi-host": import.meta.env.VITE_BASKETBALL_API_HOST,
       },
       params,
+      signal,
     });
-    console.log(123, response.data);
+
     if (response.data && response.data.response) {
       const games = response.data.response;
 
@@ -38,10 +42,10 @@ export async function getNBAGames({ season = 2023, league = "standard" } = {}) {
 
       return games;
     } else {
-      throw new Error("Aucun match trouvé.");
+      throw new Error("No matches found.");
     }
   } catch (error) {
-    console.error("❌ Erreur lors de la récupération des matchs NBA :", error);
+    console.error("❌ Error while retrieving leagues:", error);
     throw error;
   }
 }

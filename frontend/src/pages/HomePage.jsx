@@ -1,65 +1,18 @@
 import { useNavigate } from "react-router-dom";
-import MainBtn from "../components/MainBtn";
-
+import HomeCard from "../components/HomeCard";
 function HomePage() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center space-y-6">
-      <h1 className="text-3xl font-bold">Bienvenue sur MyApp</h1>
-      <p className="text-gray-600">Sélectionnez un sport pour commencer</p>
+    <div className="flex flex-col items-center justify-center flex-grow">
+      <h1 className="text-3xl font-bold">Bienvenue sur Sports-Results</h1>
 
-      <div className="flex space-x-6">
-        <MainBtn onClick={() => navigate("/football")}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
-            />
-          </svg>
-        </MainBtn>
-
-        <MainBtn onClick={() => navigate("/basketball")}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM12 2v20M2 12h20"
-            />
-          </svg>
-        </MainBtn>
-
-        <MainBtn onClick={() => navigate("/lol")}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M3 3h18v18H3zM6 6h12v12H6z"
-            />
-          </svg>
-        </MainBtn>
+      <div className="flex space-x-6 mt-6">
+        <HomeCard labelItem="football" onClick={() => navigate("/football")} />
+        <HomeCard
+          labelItem="basketball"
+          onClick={() => navigate("/basketball")}
+        />
       </div>
     </div>
   );

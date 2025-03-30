@@ -28,19 +28,18 @@ export default function DateCarousel({
   const prevWeek = () => {
     const newWeek = subWeeks(currentWeek, 1);
     setCurrentWeek(newWeek);
-    onMonthChange(newWeek); // Met à jour le mois
+    onMonthChange(newWeek);
   };
   const nextWeek = () => {
     const newWeek = addWeeks(currentWeek, 1);
     setCurrentWeek(newWeek);
-    onMonthChange(newWeek); // Met à jour le mois
+    onMonthChange(newWeek);
   };
 
-  // Lorsque la date sélectionnée change, déplace le carousel à la semaine correspondante
   useEffect(() => {
     const newStartOfWeek = startOfWeek(selectedDate, { weekStartsOn: 1 });
-    setCurrentWeek(newStartOfWeek); // Met à jour la semaine sélectionnée
-    onMonthChange(newStartOfWeek); // Met également à jour le mois affiché
+    setCurrentWeek(newStartOfWeek);
+    onMonthChange(newStartOfWeek);
   }, [selectedDate, onMonthChange]);
 
   return (
@@ -53,8 +52,8 @@ export default function DateCarousel({
           <button
             key={day}
             onClick={() => {
-              onChange(day); // Change la date sélectionnée
-              onWeekChange(day); // Change la semaine en conséquence
+              onChange(day);
+              onWeekChange(day);
             }}
             className={`px-3 py-2 rounded-md font-medium text-sm transition-colors 
                 ${
@@ -78,5 +77,5 @@ DateCarousel.propTypes = {
   selectedDate: PropTypes.instanceOf(Date).isRequired,
   onChange: PropTypes.func.isRequired,
   onMonthChange: PropTypes.func.isRequired,
-  onWeekChange: PropTypes.func.isRequired, // Ajout de cette prop
+  onWeekChange: PropTypes.func.isRequired,
 };

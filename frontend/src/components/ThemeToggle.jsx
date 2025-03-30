@@ -6,9 +6,32 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-md bg-gray-200 dark:bg-gray-800 dark:text-white"
+      className="relative w-14 h-7 flex items-center bg-gray-300 dark:bg-gray-700 rounded-full p-1 transition"
     >
-      {isDarkMode ? "Light Mode" : "Dark Mode"}
+      {/* Icône Lune (visible seulement en mode sombre) */}
+      <span
+        className={`absolute left-2 text-sm text-gray-800 dark:text-gray-200 transition-opacity ${
+          isDarkMode ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        🌙
+      </span>
+
+      {/* Icône Soleil (visible seulement en mode clair) */}
+      <span
+        className={`absolute right-2 text-sm text-gray-800 dark:text-gray-200 transition-opacity ${
+          isDarkMode ? "opacity-0" : "opacity-100"
+        }`}
+      >
+        ☀️
+      </span>
+
+      {/* Bouton glissant */}
+      <div
+        className={`w-6 h-6 bg-white dark:bg-gray-900 rounded-full shadow-md transform transition ${
+          isDarkMode ? "translate-x-6" : "translate-x-0"
+        }`}
+      />
     </button>
   );
 };

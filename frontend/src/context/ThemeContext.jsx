@@ -34,7 +34,6 @@ export const ThemeProvider = ({ children }) => {
   );
 };
 
-// Validation des props
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

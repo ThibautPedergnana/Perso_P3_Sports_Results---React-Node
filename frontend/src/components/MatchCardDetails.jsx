@@ -9,7 +9,7 @@ const MatchCardDetails = ({ match, league }) => {
   const awayWin = awayGoals > homeGoals;
 
   return (
-    <div className="relative box-border w-full flex flex-row justify-between p-0 bg-white dark:bg-gray-800 overflow-hidden">
+    <div className="relative box-border w-full flex flex-row justify-between p-0 bg-white dark:bg-gray-800 overflow-hidden shadow-lg dark:shadow-[0_2px_8px_rgba(0,0,0,0.5)] rounded-lg">
       <div className="relative flex-1 text-center flex flex-col justify-center text-xl font-bold overflow-hidden">
         {league && league.country && (
           <div className="absolute inset-0 z-0 opacity-30">
@@ -62,7 +62,7 @@ const MatchCardDetails = ({ match, league }) => {
         </p>
 
         <p className="text-lg font-semibold">
-          Stade : {match.fixture.venue.name}
+          Stadium : {match.fixture.venue.name}
         </p>
       </div>
 

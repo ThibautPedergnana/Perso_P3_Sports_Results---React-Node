@@ -6,7 +6,7 @@ const connectDB = require("./config/db");
 const { createProxyMiddleware } = require("http-proxy-middleware"); // Importez le middleware proxy
 
 const authRoutes = require("./routes/authRoutes");
-const favoriteRoutes = require("./routes/favoriteRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 connectDB();
@@ -41,7 +41,7 @@ app.use(
 );
 
 app.use("/api", authRoutes);
-app.use("/api", favoriteRoutes);
+app.use("/api/user", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 

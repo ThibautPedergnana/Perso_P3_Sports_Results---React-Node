@@ -5,7 +5,6 @@ import Route from "./components/Route";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AuthPage from "./pages/AuthPage";
-import FavoritesPage from "./pages/FavoritesPage";
 import ProfilPage from "./pages/ProfilPage";
 
 import FootballPage from "./pages/football/FootballPage";
@@ -14,8 +13,6 @@ import FootballResultsPage from "./pages/football/FootballResultsPage";
 import FootballDetailsPage from "./pages/football/FootballDetailsPage";
 
 import BasketballPage from "./pages/basketball/BasketballPage";
-import LolPage from "./pages/LolPage";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,16 +36,7 @@ const router = createBrowserRouter([
       },
 
       { path: "/basketball", element: <BasketballPage /> },
-      { path: "/lol", element: <LolPage /> },
 
-      {
-        path: "/favorites",
-        element: (
-          <Route isProtected>
-            <FavoritesPage />
-          </Route>
-        ),
-      },
       {
         path: "/profil",
         element: (

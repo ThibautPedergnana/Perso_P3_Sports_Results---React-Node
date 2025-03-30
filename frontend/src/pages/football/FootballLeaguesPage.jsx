@@ -4,11 +4,11 @@ export default function FootballLeaguesPage() {
   const { nationalLeagues, worldLeagues } = useOutletContext();
 
   return (
-    <div className="flex justify-center p-4">
+    <div className="flex flex-col items-center justify-center flex-grow p-4">
       <div className="w-full max-w-6xl flex">
         <div className="flex-1 flex flex-wrap justify-center gap-4">
           <h2 className="w-full text-center mb-4 text-xl font-semibold">
-            Ligues Nationales
+            National Leagues
           </h2>
           {nationalLeagues.map((league) => (
             <Link
@@ -30,7 +30,7 @@ export default function FootballLeaguesPage() {
 
         <div className="flex-1 flex flex-wrap justify-center gap-4">
           <h2 className="w-full text-center mb-4 text-xl font-semibold">
-            Ligues Européennes
+            European Leagues
           </h2>
           {worldLeagues.map((league) => (
             <Link

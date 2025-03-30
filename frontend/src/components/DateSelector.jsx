@@ -9,17 +9,15 @@ export default function DateSelector({ selectedDate, onChange, displayMonth }) {
   const [showPicker, setShowPicker] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(displayMonth);
 
-  // 🔥 Met à jour `currentMonth` à chaque changement de `displayMonth`
   useEffect(() => {
     setCurrentMonth(displayMonth);
   }, [displayMonth]);
 
   return (
-    <div className="w-full text-white flex justify-between items-center p-4 relative">
-      {/* Date Picker Bouton */}
+    <div className="w-full flex justify-between items-center p-4 relative">
       <div className="relative">
         <button
-          className="flex items-center space-x-2 px-4 py-2 bg-gray-800 rounded-lg"
+          className="flex items-center space-x-2 px-4 py-2 bg-white text-black rounded-lg"
           onClick={() => setShowPicker(!showPicker)}
         >
           <span className="text-lg font-semibold">
@@ -32,8 +30,8 @@ export default function DateSelector({ selectedDate, onChange, displayMonth }) {
             <DayPicker
               mode="single"
               selected={selectedDate}
-              month={currentMonth} // 👈 Toujours synchronisé avec `displayMonth`
-              onMonthChange={setCurrentMonth} // Permet de changer manuellement
+              month={currentMonth}
+              onMonthChange={setCurrentMonth}
               onSelect={(date) => {
                 if (date) {
                   onChange(date);

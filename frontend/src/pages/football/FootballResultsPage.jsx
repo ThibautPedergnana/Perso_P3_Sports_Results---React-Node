@@ -22,7 +22,7 @@ export default function FootballResultsPage() {
         const data = await getMatchesByLeague(leagueId);
         setMatches(data);
       } catch (err) {
-        setError("Impossible de charger les matchs.", err);
+        setError("Unable to load matches.", err);
       } finally {
         setLoading(false);
       }
